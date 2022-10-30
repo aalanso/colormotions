@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.linHue{
+  background: linear-gradient(to right, red 0%, #ff0 17%, lime 33%, cyan 50%, blue 66%, #f0f 83%, red 100%);
+}
+
+.pickerwrapper .react-colorful__hue {
+  height: 15%;
+  border-radius: 0 0 10px 10px;
+}
+
+.pickerwrapper .react-colorful {
+  height: 100%;
+  width: 15%;
+}
+
+.pickerwrapper .react-colorful__saturation{
+  border-radius: 10px 10px 0 0;
+}
+
+.mobilepickerwrapper .react-colorful__hue {
+  height: 15%;
+  border-radius: 0 0 10px 10px;
+}
+
+.mobilepickerwrapper .react-colorful {
+  height: 20vh;
+  width: 95%;
+}
+
+.mobilepickerwrapper .react-colorful__saturation{
+  border-radius: 10px 10px 0 0;
+}
+
+/*
+.pickerwrapper .react-colorful__saturation-pointer {
+  width: 12px;
+  height: 10%;
+  border-radius: 0;
+  border-color: black;
+}
+.pickerwrapper .react-colorful__hue-pointer {
+  width: 0.5vw;
+  height: 100%;
+  border-radius: 0;
+  border-color: black;
+  
+}*/
+
+@keyframes easeflyin {
+    0% {transform: "translateY(-100%)" }
+    100% {transform: "translateY(0%)"; animation-timing-function: cubic-bezier(0.8, 0, 1, 1) }
+}
+
+@layer base {
+  @font-face {
+      font-family: 'SatoshiRegular';
+      font-style: normal;
+      font-weight: normal;
+      src: url('../assets/Satoshi/Satoshi-Regular.otf');
+  }
+  @font-face {
+      font-family: 'SatoshiMedium';
+      font-style: medium;
+      font-weight: medium;
+      src: url('../assets/Satoshi/Satoshi-Medium.otf');
+  }
+  @font-face {
+      font-family: 'SatoshiBold';
+      font-style: bold;
+      font-weight: bold;
+      src: url('../assets/Satoshi/Satoshi-Bold.otf');
+  }
+  @font-face {
+      font-family: 'SatoshiBlack';
+      font-style: black;
+      font-weight: black;
+      src: url('../assets/Satoshi/Satoshi-Black.otf');
+  }
+  @font-face {
+      font-family: 'SatoshiLight';
+      font-style: light;
+      font-weight: light;
+      src: url('../assets/Satoshi/Satoshi-Light.otf');
+  }
+  @font-face {
+    font-family: 'Harabara';
+    src: url('../assets/HarabaraMais.otf');
+  }
+}
