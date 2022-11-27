@@ -13,7 +13,17 @@ import { useRef } from "react";
 import Link from "next/link";
 import AuthorCard from "../components/AuthorCard";
 
-var ansPack = [];
+var ansPack = [
+  "#ffffff",
+  "#ffffff",
+  "#ffffff",
+  "#ffffff",
+  "#ffffff",
+  "#ffffff",
+  "#ffffff",
+  "#ffffff",
+  "#ffffff",
+];
 
 const submitColorPacket = async (_colors) => {
   try {
@@ -41,13 +51,13 @@ export default function Home() {
 
   var emotionsArr = [
     "Joy",
-    "Fear",
+    "Excitement",
     "Loneliness",
     "Love",
     "Trust",
     "Anxiety",
     "Anger",
-    "Despair",
+    "Sadness",
     "Hope",
   ];
 
@@ -73,16 +83,36 @@ export default function Home() {
     setStep(curr + 1);
     setCurrentEmotion(emotionsArr[curr]);
     var colorread = color;
-    ansPack.push(colorread);
+    ansPack[curr - 1] = colorread;
     console.log(ansPack);
+    var colorofnext = ansPack[curr + 1];
 
-    // reset picker and bg color and text color
-    setColor("#ffffff");
+    setColor(colorofnext);
     if (cpanelRef.current != null) {
-      cpanelRef.current.setAttribute("style", `background-color: #ffffff`);
+      cpanelRef.current.setAttribute(
+        "style",
+        `background-color: ${colorofnext}`
+      );
     }
-    if (emtextRef.current != null) {
-      emtextRef.current.setAttribute("style", `color: #000000`);
+  };
+
+  const handleBack = () => {
+    var curr = step - 1;
+
+    if (curr > 0) {
+      setStep(curr);
+      setCurrentEmotion(emotionsArr[curr - 1]);
+      var colorlefthere = ansPack[curr - 1];
+      console.log("left here was:");
+      console.log(colorlefthere);
+
+      setColor(colorlefthere);
+      if (cpanelRef.current != null) {
+        cpanelRef.current.setAttribute(
+          "style",
+          `background-color: ${colorlefthere}`
+        );
+      }
     }
   };
 
@@ -157,7 +187,7 @@ export default function Home() {
 
   if (isBrowser && isMobile) {
     return (
-      <div className="w-screen h-screen flex justify-center items-center bg-white text-[5vh] text-black font-['system-ui'] animate-[opacityFadeIn_800ms_linear_1] font-medium">
+      <div className="w-screen h-screen flex justify-center items-center bg-white text-[5vh] text-[#1b1c1c] font-['system-ui'] animate-[opacityFadeIn_800ms_linear_1] font-medium">
         <title>Colormotions</title>
         {uiType === 1 ? (
           slide === 0 ? (
@@ -186,7 +216,7 @@ export default function Home() {
                 {step === 9 ? (
                   <div
                     onClick={() => handleFinished()}
-                    className="bg-black opacity-85 flex flex-row items-center justify-center text-white text-[2vh] h-full w-[8%] rounded-[10px] mx-[2vh] cursor-pointer transition-all ease-in-out hover:scale-105"
+                    className="bg-[#1b1c1c] opacity-85 flex flex-row items-center justify-center text-white text-[2vh] h-full w-[8%] rounded-[10px] mx-[2vh] cursor-pointer transition-all ease-in-out hover:scale-105"
                   >
                     <div className="">Submit</div>
                     <svg
@@ -205,7 +235,7 @@ export default function Home() {
                 ) : (
                   <div
                     onClick={() => handleNext()}
-                    className="bg-black opacity-85 flex flex-row items-center justify-center text-white text-[2vh] h-full w-[8%] rounded-[10px] mx-[2vh] cursor-pointer transition-all ease-in-out hover:scale-105"
+                    className="bg-[#1b1c1c] opacity-85 flex flex-row items-center justify-center text-white text-[2vh] h-full w-[8%] rounded-[10px] mx-[2vh] cursor-pointer transition-all ease-in-out hover:scale-105"
                   >
                     <div>Next</div>
                     <svg
@@ -223,7 +253,7 @@ export default function Home() {
                   </div>
                 )}
 
-                <div className="bg-black opacity-85 flex flex-row items-center justify-between text-white text-[2vh] h-full w-[40%] rounded-[10px] mr-[2vh]">
+                <div className="bg-[#1b1c1c] opacity-85 flex flex-row items-center justify-between text-white text-[2vh] h-full w-[40%] rounded-[10px] mr-[2vh]">
                   <div className="w-[20%] h-full flex items-center justify-center">
                     <svg
                       className="mx-[2vw]"
@@ -280,7 +310,7 @@ export default function Home() {
                 </div>
                 <Link
                   href="https://github.com/aalanso/Colormotions"
-                  className="bg-black opacity-85 flex flex-row items-center justify-center text-white text-[2vh] h-full w-[10%] rounded-[10px] cursor-pointer transition-all ease-in-out hover:scale-105"
+                  className="bg-[#1b1c1c] opacity-85 flex flex-row items-center justify-center text-white text-[2vh] h-full w-[10%] rounded-[10px] cursor-pointer transition-all ease-in-out hover:scale-105"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -316,8 +346,8 @@ export default function Home() {
   }
 
   return (
-    <div className="w-screen h-screen flex flex-col justify-center items-center bg-white text-[5vh] text-black font-['system-ui'] animate-[opacityFadeIn_800ms_linear_1] font-medium">
-      <BrowserView className="w-screen h-screen flex flex-col justify-center items-center bg-white text-[5vh] text-black font-['system-ui'] animate-[opacityFadeIn_800ms_linear_1] font-medium">
+    <div className="w-screen h-screen flex flex-col justify-center items-center bg-white text-[5vh] text-[#1b1c1c] font-['system-ui'] animate-[opacityFadeIn_800ms_linear_1] font-medium">
+      <BrowserView className="w-screen h-screen flex flex-col justify-center items-center bg-white text-[5vh] text-[#1b1c1c] font-['system-ui'] animate-[opacityFadeIn_800ms_linear_1] font-medium">
         <title>Colormotions</title>
         {uiType === 1 ? (
           slide === 0 ? (
@@ -339,16 +369,35 @@ export default function Home() {
           ) : (
             <div ref={cpanelRef} className={`w-screen h-screen flex flex-col`}>
               <div className="w-full h-[84%] flex items-center justify-center">
-                <div ref={emtextRef} className="font-['Harabara'] text-[10vh]">
+                <div className="font-['Harabara'] font-bold text-[10vh] text-white  outlinetextclass">
                   {currentEmotion}
                 </div>
               </div>
               <div className="flex flex-row w-full h-[15%] items-center justify-center pickerwrapper">
+                <div
+                  className="bg-[#1b1c1c] opacity-85 flex flex-row items-center justify-center text-white text-[2vh] mx-[2vh] h-full w-[8%] rounded-[10px] cursor-pointer transition-all ease-in-out hover:scale-105"
+                  onClick={handleBack}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="2vh"
+                    height="2vh"
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="white"
+                      d="M9.125 21.1L.7 12.7q-.15-.15-.212-.325Q.425 12.2.425 12t.063-.375Q.55 11.45.7 11.3l8.425-8.425q.35-.35.875-.35t.9.375q.375.375.375.875t-.375.875L3.55 12l7.35 7.35q.35.35.35.862q0 .513-.375.888t-.875.375q-.5 0-.875-.375Z"
+                    />
+                  </svg>
+                  <div>Back</div>
+                </div>
                 <HexColorPicker color={color} onChange={handleChange} />
+
                 {step === 9 ? (
                   <div
                     onClick={() => handleFinished()}
-                    className="bg-black opacity-85 flex flex-row items-center justify-center text-white text-[2vh] h-full w-[8%] rounded-[10px] mx-[2vh] cursor-pointer transition-all ease-in-out hover:scale-105"
+                    className="bg-[#1b1c1c] opacity-85 flex flex-row items-center justify-center text-white text-[2vh] h-full w-[8%] rounded-[10px] mx-[2vh] cursor-pointer transition-all ease-in-out hover:scale-105"
                   >
                     <div className="">Submit</div>
                     <svg
@@ -367,7 +416,7 @@ export default function Home() {
                 ) : (
                   <div
                     onClick={() => handleNext()}
-                    className="bg-black opacity-85 flex flex-row items-center justify-center text-white text-[2vh] h-full w-[8%] rounded-[10px] mx-[2vh] cursor-pointer transition-all ease-in-out hover:scale-105"
+                    className="bg-[#1b1c1c] opacity-85 flex flex-row items-center justify-center text-white text-[2vh] h-full w-[8%] rounded-[10px] mx-[2vh] cursor-pointer transition-all ease-in-out hover:scale-105"
                   >
                     <div>Next</div>
                     <svg
@@ -385,7 +434,7 @@ export default function Home() {
                   </div>
                 )}
 
-                <div className="bg-black opacity-85 flex flex-row items-center justify-between text-white text-[2vh] h-full w-[40%] rounded-[10px] mr-[2vh]">
+                <div className="bg-[#1b1c1c] opacity-85 flex flex-row items-center justify-between text-white text-[2vh] h-full w-[40%] rounded-[10px] mr-[2vh]">
                   <div className="w-[20%] h-full flex items-center justify-center">
                     <svg
                       className="mx-[2vw]"
@@ -440,27 +489,6 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <Link
-                  href="https://github.com/aalanso/Colormotions"
-                  className="bg-black opacity-85 flex flex-row items-center justify-center text-white text-[2vh] h-full w-[10%] rounded-[10px] cursor-pointer transition-all ease-in-out hover:scale-105"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="2vw"
-                    height="2vw"
-                    preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 24 24"
-                  >
-                    <g fill="none">
-                      <path d="M0 0h24v24H0z" />
-                      <path
-                        fill="white"
-                        d="M7.024 2.31a9.08 9.08 0 0 1 2.125 1.046A11.432 11.432 0 0 1 12 3c.993 0 1.951.124 2.849.355a9.08 9.08 0 0 1 2.124-1.045c.697-.237 1.69-.621 2.28.032c.4.444.5 1.188.571 1.756c.08.634.099 1.46-.111 2.28C20.516 7.415 21 8.652 21 10c0 2.042-1.106 3.815-2.743 5.043a9.456 9.456 0 0 1-2.59 1.356c.214.49.333 1.032.333 1.601v3a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-.991c-.955.117-1.756.013-2.437-.276c-.712-.302-1.208-.77-1.581-1.218c-.354-.424-.74-1.38-1.298-1.566a1 1 0 0 1 .632-1.898c.666.222 1.1.702 1.397 1.088c.48.62.87 1.43 1.63 1.753c.313.133.772.22 1.49.122L8 17.98a3.986 3.986 0 0 1 .333-1.581a9.455 9.455 0 0 1-2.59-1.356C4.106 13.815 3 12.043 3 10c0-1.346.483-2.582 1.284-3.618c-.21-.82-.192-1.648-.112-2.283l.005-.038c.073-.582.158-1.267.566-1.719c.59-.653 1.584-.268 2.28-.031Z"
-                      />
-                    </g>
-                  </svg>
-                  <div>About this</div>
-                </Link>
               </div>
             </div>
           )
@@ -474,7 +502,7 @@ export default function Home() {
           </div>
         )}
       </BrowserView>
-      <MobileView className="w-screen h-screen flex justify-center items-center bg-white text-[5vh] text-black font-['system-ui'] animate-[opacityFadeIn_800ms_linear_1] font-medium">
+      <MobileView className="w-screen h-screen flex justify-center items-center bg-white text-[5vh] text-[#1b1c1c] font-['system-ui'] animate-[opacityFadeIn_800ms_linear_1] font-medium">
         <title>Colormotions</title>
         {uiType === 1 ? (
           slide === 0 ? (
@@ -508,7 +536,7 @@ export default function Home() {
               </div>
 
               <div className="absolute flex flex-col top-0 w-screen h-screen">
-                <div className="bg-black opacity-85 flex flex-row items-center justify-between text-white text-[1.7vh] h-[13vh] w-[95%] rounded-[10px] py-[1vh] mb-[46vh] ml-[1vh] mt-[1vh]">
+                <div className="bg-[#1b1c1c] opacity-85 flex flex-row items-center justify-between text-white text-[1.7vh] h-[13vh] w-[95%] rounded-[10px] py-[1vh] mb-[46vh] ml-[1vh] mt-[1vh]">
                   <div className="w-[20%] h-full flex items-center justify-center">
                     <svg
                       className="mx-[2vw]"
@@ -569,7 +597,7 @@ export default function Home() {
                   <div className="flex flex-row w-full h-min my-[1vh]">
                     <Link
                       href="https://github.com/aalanso/Colormotions"
-                      className="bg-black opacity-85 flex flex-row items-center justify-center text-white text-[2vh] h-[10vh] w-[48.5vw] rounded-[10px] ml-[1vh] mr-[0.5vh] cursor-pointer transition-all ease-in-out hover:scale-105"
+                      className="bg-[#1b1c1c] opacity-85 flex flex-row items-center justify-center text-white text-[2vh] h-[10vh] w-[48.5vw] rounded-[10px] ml-[1vh] mr-[0.5vh] cursor-pointer transition-all ease-in-out hover:scale-105"
                     >
                       <svg
                         className="mr-[1vh]"
@@ -592,7 +620,7 @@ export default function Home() {
                     {step === 9 ? (
                       <div
                         onClick={() => handleFinished()}
-                        className="bg-black opacity-85 flex flex-row items-center justify-center text-white text-[2vh] h-[10vh] w-[48.5vw] rounded-[10px] mr-[1vh] ml-[0.5vh] cursor-pointer transition-all ease-in-out hover:scale-105"
+                        className="bg-[#1b1c1c] opacity-85 flex flex-row items-center justify-center text-white text-[2vh] h-[10vh] w-[48.5vw] rounded-[10px] mr-[1vh] ml-[0.5vh] cursor-pointer transition-all ease-in-out hover:scale-105"
                       >
                         <div className="">Submit</div>
                         <svg
@@ -611,7 +639,7 @@ export default function Home() {
                     ) : (
                       <div
                         onClick={() => handleNext()}
-                        className="bg-black opacity-85 flex flex-row items-center justify-center text-white text-[2vh] h-[10vh] w-[48.5vw] rounded-[10px] mr-[1vh] ml-[0.5vh] cursor-pointer transition-all ease-in-out hover:scale-105"
+                        className="bg-[#1b1c1c] opacity-85 flex flex-row items-center justify-center text-white text-[2vh] h-[10vh] w-[48.5vw] rounded-[10px] mr-[1vh] ml-[0.5vh] cursor-pointer transition-all ease-in-out hover:scale-105"
                       >
                         <div>Next</div>
                         <svg
